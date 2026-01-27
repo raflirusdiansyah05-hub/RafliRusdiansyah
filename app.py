@@ -89,18 +89,44 @@ if clicked:
         try:
             if pilihan == "Permutasi":
                 hasil = math.factorial(n) // math.factorial(n - r)
+
                 st.markdown(
                     f'<p class="result-text">Hasil: P({n},{r}) = {hasil:,}</p>',
                     unsafe_allow_html=True
                 )
+
+                with st.expander("Lihat Rumus"):
+                    st.latex(r"P(n,r) = \frac{n!}{(n-r)!}")
+
+                with st.expander("Lihat Cara Perhitungan"):
+                    st.latex(f"P({n},{r}) = \\frac{{{n}!}}{{({n}-{r})!}}")
+                    st.markdown(f"= {n}! ÷ {n-r}!")
+                    st.markdown(f"= {math.factorial(n):,} ÷ {math.factorial(n-r):,}")
+                    st.markdown(f"= **{hasil:,}**")
+
             else:
                 hasil = math.factorial(n) // (
                     math.factorial(r) * math.factorial(n - r)
                 )
+
                 st.markdown(
                     f'<p class="result-text">Hasil: C({n},{r}) = {hasil:,}</p>',
                     unsafe_allow_html=True
                 )
+
+                with st.expander("Lihat Rumus"):
+                    st.latex(r"C(n,r) = \frac{n!}{r!(n-r)!}")
+
+                with st.expander("Lihat Cara Perhitungan"):
+                    st.latex(
+                        f"C({n},{r}) = \\frac{{{n}!}}{{{r}! ({n}-{r})!}}"
+                    )
+                    st.markdown(f"= {n}! ÷ ({r}! × {n-r}!)")
+                    st.markdown(
+                        f"= {math.factorial(n):,} ÷ "
+                        f"({math.factorial(r):,} × {math.factorial(n-r):,})"
+                    )
+                    st.markdown(f"= **{hasil:,}**")
 
             st.markdown(
                 '<p class="footer-text">Tugas Mata Kuliah Statistika 2026</p>',
@@ -109,4 +135,3 @@ if clicked:
 
         except Exception:
             st.error("❌ Nilai terlalu besar untuk dihitung!")
-
