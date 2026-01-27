@@ -2,17 +2,12 @@ import streamlit as st
 import math
 
 # ==============================
-# Konfigurasi Halaman
+# WAJIB PALING ATAS
 # ==============================
 st.set_page_config(
     page_title="Kalkulator Kombinasi & Permutasi",
     layout="centered"
 )
-
-# ==============================
-# FORCE CSS RELOAD (ANTI CACHE)
-# ==============================
-st.markdown("<!-- force css reload v2 -->", unsafe_allow_html=True)
 
 # ==============================
 # Custom CSS
@@ -88,64 +83,25 @@ if not clicked:
 # Proses Hitung
 # ==============================
 if clicked:
-
     if r > n:
         st.error("❌ Nilai r tidak boleh lebih besar dari n")
-
     else:
         try:
-            # ==============================
-            # PERMUTASI
-            # ==============================
             if pilihan == "Permutasi":
                 hasil = math.factorial(n) // math.factorial(n - r)
-
                 st.markdown(
                     f'<p class="result-text">Hasil: P({n},{r}) = {hasil:,}</p>',
                     unsafe_allow_html=True
                 )
-
-                with st.expander("Lihat Rumus"):
-                    st.markdown("**Rumus Permutasi:**")
-                    st.latex(r"P(n,r) = \frac{n!}{(n-r)!}")
-
-                with st.expander("Lihat Cara Perhitungan"):
-                    st.latex(f"P({n},{r}) = \\frac{{{n}!}}{{({n}-{r})!}}")
-                    st.markdown(f"= {n}! ÷ {n-r}!")
-                    st.markdown(f"= {math.factorial(n):,} ÷ {math.factorial(n-r):,}")
-                    st.markdown(f"= **{hasil:,}**")
-
-            # ==============================
-            # KOMBINASI
-            # ==============================
             else:
                 hasil = math.factorial(n) // (
                     math.factorial(r) * math.factorial(n - r)
                 )
-
                 st.markdown(
                     f'<p class="result-text">Hasil: C({n},{r}) = {hasil:,}</p>',
                     unsafe_allow_html=True
                 )
 
-                with st.expander("Lihat Rumus"):
-                    st.markdown("**Rumus Kombinasi:**")
-                    st.latex(r"C(n,r) = \frac{n!}{r!(n-r)!}")
-
-                with st.expander("Lihat Cara Perhitungan"):
-                    st.latex(
-                        f"C({n},{r}) = \\frac{{{n}!}}{{{r}! \\times ({n}-{r})!}}"
-                    )
-                    st.markdown(f"= {n}! ÷ ({r}! × {n-r}!)")
-                    st.markdown(
-                        f"= {math.factorial(n):,} ÷ "
-                        f"({math.factorial(r):,} × {math.factorial(n-r):,})"
-                    )
-                    st.markdown(f"= **{hasil:,}**")
-
-            # ==============================
-            # Footer (SETELAH HITUNG)
-            # ==============================
             st.markdown(
                 '<p class="footer-text">Tugas Mata Kuliah Statistika 2026</p>',
                 unsafe_allow_html=True
